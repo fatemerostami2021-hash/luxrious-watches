@@ -166,3 +166,43 @@ a:focus{outline:none}a:focus-visible,button:focus-visible{outline:1px solid #c9a
 .pf-end{align-items:flex-start}.pf-end .btn{align-self:flex-start}
 @media(max-width:1000px){.pf-skills{grid-template-columns:1fr 1fr}}
 @media(max-width:899px){.pf-pin{height:auto;overflow:visible;padding:60px 0}.pf-track{flex-direction:column;padding-inline:6vw}.pf-card{flex:none;min-height:0}.pf-skills{grid-template-columns:1fr}.pf-sec,.pf-hero{padding-inline:6vw}}
+/* v12: tools grid */
+.pf-tools{min-height:auto;align-items:flex-start}.pf-cat{width:100%}.pf-cat .kicker{margin:10px 0 12px}
+.pf-chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.pf-tool{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid #ffffff22;background:rgba(12,12,14,.34);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);color:inherit;transition:transform .3s,border-color .3s,box-shadow .3s}
+.pf-tool:hover,.pf-tool:focus-visible{transform:translateY(-4px);border-color:var(--c);box-shadow:0 10px 28px color-mix(in srgb,var(--c) 40%,transparent)}
+.ti{width:42px;height:42px;display:grid;place-items:center;flex:none;border-radius:10px;border:1px solid #ffffff33}.ti b{font-size:13px;letter-spacing:0}.tn strong{display:block;font-size:14px}.tn em{display:block;font-style:normal;font-size:12px;opacity:.75;margin-top:2px}
+[data-theme=light] .pf-tool{background:rgba(255,250,240,.5);border-color:#00000022}
+/* v13: orange accent for the light theme (cream + black + orange) */
+[data-theme=light]{--ac:#c2410c;--af:#ea580c}
+[data-theme=light] ::selection{background:#ea580c;color:#fff}
+[data-theme=light] .kicker,[data-theme=light] .glass .kicker,[data-theme=light] .more,[data-theme=light] .cardfoot span,[data-theme=light] .pmeta b,[data-theme=light] .stat b,[data-theme=light] .close,[data-theme=light] .tag,[data-theme=light] .pf-role,[data-theme=light] .pf-skills h3,[data-theme=light] .cols h3,[data-theme=light] .fcard i,[data-theme=light] .mh,[data-theme=light] .wlogo,[data-theme=light] .glass strong{color:var(--ac)}
+[data-theme=light] .nl a:hover,[data-theme=light] .nl a.act,[data-theme=light] .tl:hover{color:var(--ac);border-bottom-color:var(--af)}[data-theme=light] .ib:hover,[data-theme=light] .mega a:hover,[data-theme=light] .mega button:hover,[data-theme=light] .srch a:hover{color:var(--ac)}
+[data-theme=light] .ft .c::after{color:var(--ac)}
+[data-theme=light] .btn:hover{background:var(--af);border-color:var(--af);color:#fff}[data-theme=light] .btn.fill{background:var(--af);border-color:var(--af);color:#fff}[data-theme=light] .btn.fill:hover{background:#0b0b0c;border-color:#0b0b0c}
+[data-theme=light] .fab{background:var(--af);color:#fff}[data-theme=light] .chat{border-color:var(--af)}[data-theme=light] .chead b,[data-theme=light] .quick button,[data-theme=light] .chat form button{color:var(--ac)}[data-theme=light] .quick button{border-color:var(--af)}[data-theme=light] .me{background:var(--af);color:#fff}
+[data-theme=light] .card:hover,[data-theme=light] .opt .on,[data-theme=light] .filters .on,[data-theme=light] .flags .on{border-color:var(--af);color:var(--ac)}[data-theme=light] .flags .on{color:inherit}
+[data-theme=light] .social a:hover,[data-theme=light] .fsup,[data-theme=light] .arrs button{color:var(--ac);border-color:var(--af)}
+[data-theme=light] .dots .on,[data-theme=light] .steps i.on{background:var(--af)}[data-theme=light] .badge{background:var(--af);color:#fff}
+[data-theme=light] .glass{border-color:rgba(234,88,12,.35)}[data-theme=light] .fcard:hover,[data-theme=light] .pf-card:hover{border-color:var(--af)}
+/* v14: 3D tool mountain, bolder portfolio text, highlights */
+.pf{--acc:#c9a96e}[data-theme=light] .pf{--acc:#ea580c}
+.pf p,.pf .lead,.pf li{font-weight:600}.pf h2,.pf h3,.pf-card h3{font-weight:700}.pf .lead{font-size:16px}[dir=rtl] .pf .lead{font-weight:700}
+.pf-mark{color:inherit;font-weight:800;padding:0 .12em;background-image:linear-gradient(transparent 52%,color-mix(in srgb,var(--acc) 55%,transparent) 52%);background-repeat:no-repeat;background-position:left bottom;background-size:0% 100%;-webkit-box-decoration-break:clone;box-decoration-break:clone}[dir=rtl] .pf-mark{background-position:right bottom}
+.scene3d{position:relative;width:100%;height:560px;margin-top:10px;overflow:hidden;border:1px solid #ffffff1c;background:rgba(12,12,14,.34);-webkit-backdrop-filter:blur(12px) saturate(1.1);backdrop-filter:blur(12px) saturate(1.1);contain:layout paint}
+[data-theme=light] .scene3d{background:rgba(255,250,240,.58);border-color:rgba(234,88,12,.3)}
+.ring{position:absolute;left:0;top:0;border:1px dashed var(--acc);border-radius:50%;opacity:.38;pointer-events:none;will-change:transform}
+.node{position:absolute;left:0;top:0;width:96px;display:flex;flex-direction:column;align-items:center;gap:6px;color:inherit;will-change:transform,opacity}
+.node .ti{width:56px;height:56px;border-radius:14px;box-shadow:0 8px 24px color-mix(in srgb,var(--c) 45%,transparent);transition:transform .3s}.node:hover .ti{transform:scale(1.18)}
+.nm{max-width:96px;overflow:hidden;text-overflow:ellipsis;font-size:11px;font-weight:800;white-space:nowrap;letter-spacing:0;text-shadow:0 1px 6px rgba(0,0,0,.6)}[data-theme=light] .nm{text-shadow:0 0 8px rgba(245,239,227,.95)}
+.peak{position:absolute;width:24px;height:24px;margin:-12px 0 0 -12px;border-radius:50%;background:radial-gradient(circle,#fff,var(--acc) 55%,transparent 72%);box-shadow:0 0 50px 16px var(--acc);animation:pulse 2.4s ease-in-out infinite;pointer-events:none}@keyframes pulse{50%{transform:scale(1.35);opacity:.7}}
+.base{position:absolute;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--acc) 38%,transparent),transparent);pointer-events:none}
+.pf-list{margin-top:18px;width:100%}.pf-list summary{cursor:pointer;font-weight:800;color:var(--acc);padding:8px 0}.pf-list[open] .pf-cat{margin-top:6px}
+@media(prefers-reduced-motion:reduce){.peak{animation:none}}
+/* v15: about card with photo, calmer background behind the tools */
+.pf-stage{will-change:opacity}
+.pf-sec .pf-about{width:min(980px,100%);display:grid;grid-template-columns:minmax(200px,300px) 1fr;gap:12px 38px;align-items:center}
+.pf-about h2{margin-top:0}
+.pf-photo{margin:0;position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:16px;border:1px solid color-mix(in srgb,var(--acc) 60%,transparent);box-shadow:0 18px 50px rgba(0,0,0,.35)}
+.pf-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 20%}
+@media(max-width:760px){.pf-sec .pf-about{grid-template-columns:1fr}.pf-photo{width:min(240px,70%);margin-inline:auto}}
