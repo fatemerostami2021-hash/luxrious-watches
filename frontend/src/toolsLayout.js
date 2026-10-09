@@ -2,7 +2,7 @@
 export const rad = d => d * Math.PI / 180
 export const clamp = (v, a, b) => Math.min(b, Math.max(a, v))
 
-export const H = 112                         // vertical distance between tiers
+export const H = 112                         // vertical distance between tiers inside one column
 export const NODE_W = 96, NODE_H = 80        // node box (icon + label)
 export const TILT = { min: 10, rest: 13, max: 16 }   // camera tilt in degrees (pointer moves it inside this range)
 export const VIS = { full: .62, none: .3 }   // cos(angle): fully visible above .62, invisible below .30
@@ -21,24 +21,32 @@ export function tierRadius(m) {
   return Math.max(base, (NODE_W + 6) / gap)
 }
 
+// Static description of every tier (order never changes, so the DOM stays stable).
 export function buildTiers(tools) {
-  const sorted = sortTiers(tools), n = sorted.length
-  return sorted.map((c, i) => {
+  return sortTiers(tools).map((c, i) => {
     const m = c.items.length
-    return { id: c.id, m, r: tierRadius(m), y0: (i - (n - 1) / 2) * H, floor: m <= 2 ? .22 : 0,
+    return { id: c.id, m, r: tierRadius(m), floor: m <= 2 ? .22 : 0,
       items: c.items.map((t, j) => ({ t, a: (j * 360) / m + i * 23 })) }
   })
 }
 
-export function metrics(tiers, W) {
+// Where each tier goes for a given scene width: one column, or two columns side by side
+// when there is room (this roughly halves the height). Tiers are dealt out alternately
+// so both columns stay cone-shaped (small rings on top, big rings below).
+export function arrange(tiers, W) {
   const rmax = Math.max(...tiers.map(t => t.r))
   const fitW = 2 * rmax * Math.sqrt(1 - VIS.none ** 2) + NODE_W + 24
-  const k = clamp(W / fitW, .5, 1)
-  const top = tiers[0].y0 - 140, bottom = tiers[tiers.length - 1].y0 + rmax * Math.sin(rad(TILT.max)) + 70
-  return { k, rmax, h: (bottom - top) * k, cy: -top * k }
+  const cols = tiers.length > 1 && W >= 2 * fitW * .6 ? 2 : 1
+  const k = clamp(W / (cols * fitW), .5, 1)
+  const groups = Array.from({ length: cols }, () => [])
+  tiers.forEach((_, i) => groups[i % cols].push(i))
+  const pos = [], nmax = Math.max(...groups.map(g => g.length))
+  groups.forEach((g, c) => g.forEach((ti, idx) => { pos[ti] = { y0: (idx - (g.length - 1) / 2) * H, cx: W * (c + .5) / cols } }))
+  const top = -((nmax - 1) / 2) * H - 110, bottom = ((nmax - 1) / 2) * H + rmax * Math.sin(rad(TILT.max)) + 60
+  return { cols, k, rmax, groups, pos, h: (bottom - top) * k, cy: -top * k }
 }
 
-// Position of one node (relative to the scene centre, before adding cx / cy).
+// Position of one node relative to its column centre (add the column's cx / the scene cy).
 export function place(a, tier, phase, tilt, k) {
   const th = rad(a + phase), c = Math.cos(th), st = Math.sin(rad(tilt))
   return {

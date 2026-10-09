@@ -206,3 +206,8 @@ a:focus{outline:none}a:focus-visible,button:focus-visible{outline:1px solid #c9a
 .pf-photo{margin:0;position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:16px;border:1px solid color-mix(in srgb,var(--acc) 60%,transparent);box-shadow:0 18px 50px rgba(0,0,0,.35)}
 .pf-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 20%}
 @media(max-width:760px){.pf-sec .pf-about{grid-template-columns:1fr}.pf-photo{width:min(240px,70%);margin-inline:auto}}
+/* v16: <mark> has a yellow UA background — keep only the animated underline highlight */
+.pf-mark{background-color:transparent;color:inherit;text-shadow:none}
+.pf{--mk:42%}[data-theme=light] .pf{--mk:50%}
+.pf-mark{background-image:linear-gradient(transparent 56%,color-mix(in srgb,var(--acc) var(--mk),transparent) 56%)}
+[data-theme=dark] .pf-mark{color:#fff}
