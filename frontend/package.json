@@ -18,7 +18,8 @@
     "zustand": "^4.5.2",
     "@fontsource/vazirmatn": "^5.0.0",
     "@fontsource/cormorant-garamond": "^5.0.0",
-    "@fontsource/inter": "^5.0.0"
+    "@fontsource/inter": "^5.0.0",
+    "gsap": "^3.12.5"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.0",
