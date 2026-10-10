@@ -3,3 +3,5 @@ node_modules
 dist
 .vercel
 frontend/vazir-font*.zip
+# Playwright CLI output (may contain credentials)
+.playwright-cli/
