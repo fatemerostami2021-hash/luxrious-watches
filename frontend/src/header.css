@@ -142,3 +142,8 @@ main{width:100%;max-width:100%;min-width:0}
 @keyframes pfaurora{from{transform:translate(-6%,-4%) rotate(0) scale(1)}to{transform:translate(6%,5%) rotate(25deg) scale(1.12)}}
 @keyframes pfflow{to{transform:translateX(30px)}}
 @media(prefers-reduced-motion:reduce){.pf-card::before,.pf-card::after{animation:none!important}}
+
+/* ---- v21: tighter gap between the hero intro and the About card ---- */
+.pf-hero{min-height:0;padding:140px 8vw 36px}
+.pf-sec:has(>.pf-about){min-height:0;padding-top:24px}
+@media(max-width:899px){.pf-hero{padding:120px 6vw 28px}.pf-sec:has(>.pf-about){padding-top:16px}}
