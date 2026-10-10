@@ -4,10 +4,10 @@ import { useMemo, useRef } from 'react'
 function Rig({ prog, accent }) {
   const g = useRef(), pts = useRef(), pos = useMemo(() => Float32Array.from({ length: 900 }, () => (Math.random() - .5) * 14), [])
   useFrame(({ camera, clock }) => {
-    const p = prog.current, t = clock.elapsedTime, w = innerWidth > 900
-    g.current.rotation.y = p * Math.PI * 5 + t * .15; g.current.rotation.x = Math.sin(p * Math.PI * 2) * .6
-    g.current.position.x += ((w ? Math.sin(p * Math.PI * 2) * 2 : 0) - g.current.position.x) * .05; g.current.scale.setScalar(1 + Math.sin(p * Math.PI) * .45)
-    camera.position.z += (7.5 - p * 2 - camera.position.z) * .05; pts.current.rotation.y = t * .03 + p * 1.2
+    const p = prog.current, t = clock.elapsedTime, w = innerWidth > 900, side = document.documentElement.dir === 'rtl' ? -1 : 1
+    g.current.rotation.y = p * Math.PI * 5 + t * .15; g.current.rotation.x = Math.sin(p * Math.PI * 2) * .35
+    g.current.position.x += ((w ? side * 2.7 + Math.sin(p * Math.PI * 2) * .5 : 0) - g.current.position.x) * .05; g.current.scale.setScalar((w ? .6 : .46) * (1 + Math.sin(p * Math.PI) * .12))
+    camera.position.z += ((w ? 8.4 : 9) - p - camera.position.z) * .05; pts.current.rotation.y = t * .03 + p * 1.2
   })
   const gold = <meshStandardMaterial color={accent} metalness={1} roughness={.3} wireframe transparent opacity={.5} />
   return <><group ref={g}><mesh><torusKnotGeometry args={[1.1, .32, 160, 16]} />{gold}</mesh><mesh><icosahedronGeometry args={[.7, 1]} /><meshStandardMaterial color="#d8a08a" metalness={1} roughness={.25} flatShading /></mesh>

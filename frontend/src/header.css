@@ -65,9 +65,9 @@
 
 /* ---- v19: hamburger turns into an X ---- */
 .hb i{transition:transform .3s,opacity .2s}
-.hb[aria-expanded=true] i:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hb[aria-expanded=true] i:nth-child(1){transform:translateY(8px) rotate(45deg)}
 .hb[aria-expanded=true] i:nth-child(2){opacity:0}
-.hb[aria-expanded=true] i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.hb[aria-expanded=true] i:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
 
 /* ---- v19: mobile overflow / sliding fix (Articles + Collection) ---- */
 html,body{max-width:100%;overflow-x:hidden}
@@ -89,3 +89,56 @@ main{width:100%;max-width:100%;min-width:0}
   .cbanner{height:clamp(220px,38vh,320px)}.cbanner div{padding:0 5vw 24px}
   .page{padding-inline:5vw}
 }
+
+/* ================= v20 ================= */
+:root{--acc2:#8fe0f0}[data-theme=light]{--acc2:#0e7490}
+
+/* ---- tablet: earlier hamburger, bigger touch target, dropdown card ---- */
+.hb{gap:6px;width:44px;height:44px;padding:0;align-items:center;justify-content:center;border:1px solid #ffffff33;border-radius:12px;flex:none;transition:border-color .25s,background .25s}
+.hb i{width:22px}.hb:hover,.hb[aria-expanded=true]{border-color:#c9a96e;background:rgba(201,169,110,.12)}
+[data-theme=light] .hb{border-color:#00000033}[data-theme=light] .hb:hover,[data-theme=light] .hb[aria-expanded=true]{border-color:var(--af);background:rgba(234,88,12,.08)}
+@media(max-width:1280px){.nl,.dsk{display:none}.hb{display:flex}.mega{display:none}}
+@media(min-width:700px) and (max-width:1280px){.tbl{display:inline-flex;align-items:center}.mobrow{display:none}}
+.mobscrim{position:fixed;inset:66px 0 0;background:rgba(0,0,0,.4);z-index:-1}
+@media(min-width:700px){.mobmenu{inset-inline-start:auto;inset-inline-end:3vw;width:min(420px,94vw);border:1px solid #ffffff1f;border-top:0;border-radius:0 0 16px 16px;box-shadow:0 24px 60px rgba(0,0,0,.45)}[data-theme=light] .mobmenu{border-color:#00000022}}
+@media(max-width:699px){.hb{width:42px;height:42px}}
+
+/* ---- dark theme: second colour (ice) + brighter text ---- */
+[data-theme=dark] .card p,[data-theme=dark] .cols a,[data-theme=dark] .cols span,[data-theme=dark] .cols p{color:#d6d1c5}
+[data-theme=dark] .pf p,[data-theme=dark] .pf .lead,[data-theme=dark] .pf li{color:#f3efe6}
+[data-theme=dark] .pf-hero .lead,[data-theme=dark] .pf-hero .pf-role,[data-theme=dark] .pf-hero .kicker{text-shadow:0 2px 16px rgba(0,0,0,.95)}
+[data-theme=dark] .pf .glass{background:rgba(8,8,10,.82);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+[data-theme=dark] .pf-mark,html:not([data-theme=light]) .pf-mark{background:none!important;background-image:none!important;color:var(--acc2)!important;font-weight:800;padding:0}
+[data-theme=dark] .pf-skills h3,[data-theme=dark] .pf-card .kicker,[data-theme=dark] .pf-list summary{color:var(--acc2)}
+[data-theme=dark] .pf-card .btn:hover,[data-theme=dark] .pf-card:hover{border-color:var(--acc2)}
+[data-theme=dark] .pf-card .btn:hover{color:var(--acc2)}
+
+/* ---- featured projects: each card gets its own animated background ---- */
+.pf-card{position:relative;overflow:hidden;isolation:isolate}
+.pf-card>*{position:relative;z-index:1}
+.pf-card::before,.pf-card::after{content:'';position:absolute;pointer-events:none;z-index:-1}
+.pf-track>.pf-card:nth-child(1)::before{inset:-60%;background:conic-gradient(from 0deg,transparent 0 76%,rgba(201,169,110,.5) 94%,transparent);animation:pfspin 8s linear infinite}
+.pf-track>.pf-card:nth-child(1)::after{inset:0;background:repeating-radial-gradient(circle at 78% 24%,transparent 0 20px,rgba(201,169,110,.16) 21px 22px);animation:pfpulse 4s ease-in-out infinite}
+.pf-track>.pf-card:nth-child(2)::before{inset:0 0 -240px;background:radial-gradient(circle,#ff9a3c 0 2px,transparent 3px) 0 0/80px 120px,radial-gradient(circle,#ff5a1f 0 1.6px,transparent 2.6px) 30px 40px/120px 240px,radial-gradient(circle,#ffd08a 0 1px,transparent 2px) 14px 20px/60px 80px;opacity:.55;animation:pfrise 10s linear infinite}
+.pf-track>.pf-card:nth-child(2)::after{inset:0;background:radial-gradient(ellipse at 50% 125%,rgba(255,90,30,.4),transparent 62%);animation:pfflick 2.4s ease-in-out infinite}
+.pf-track>.pf-card:nth-child(3)::before{inset:-48px;background:linear-gradient(rgba(94,160,255,.2) 1px,transparent 1px) 0 0/24px 24px,linear-gradient(90deg,rgba(94,160,255,.2) 1px,transparent 1px) 0 0/24px 24px;animation:pfgrid 6s linear infinite}
+.pf-track>.pf-card:nth-child(3)::after{inset:0 0 auto;height:30%;background:linear-gradient(180deg,transparent,rgba(94,160,255,.3) 50%,transparent);animation:pfscan 5s linear infinite}
+.pf-track>.pf-card:nth-child(4)::before{inset:auto 0 0;height:62%;background:repeating-linear-gradient(90deg,rgba(45,212,191,.38) 0 10px,transparent 10px 26px);transform-origin:bottom;-webkit-mask-image:linear-gradient(0deg,#000,transparent);mask-image:linear-gradient(0deg,#000,transparent);animation:pfbars 2.8s ease-in-out infinite alternate}
+.pf-track>.pf-card:nth-child(4)::after{inset:auto 0 0;height:48%;background:repeating-linear-gradient(90deg,transparent 0 13px,rgba(125,211,252,.3) 13px 23px,transparent 23px 26px);transform-origin:bottom;-webkit-mask-image:linear-gradient(0deg,#000,transparent);mask-image:linear-gradient(0deg,#000,transparent);animation:pfbars 3.6s ease-in-out -1.2s infinite alternate-reverse}
+.pf-track>.pf-card:nth-child(5)::before,.pf-track>.pf-card:nth-child(5)::after{width:260px;height:260px;inset-inline-end:-50px;top:14%;border-radius:50%;border:2px solid rgba(163,230,53,.55);animation:pfripple 3.2s ease-out infinite}
+.pf-track>.pf-card:nth-child(5)::after{animation-delay:-1.6s}
+.pf-track>.pf-card:nth-child(6)::before{inset:-30%;background:radial-gradient(40% 40% at 25% 30%,rgba(125,160,255,.45),transparent 70%),radial-gradient(35% 35% at 75% 25%,rgba(190,120,255,.4),transparent 70%),radial-gradient(40% 40% at 55% 80%,rgba(90,220,210,.35),transparent 70%);filter:blur(14px);animation:pfaurora 12s ease-in-out infinite alternate}
+.pf-track>.pf-card:nth-child(7)::before{inset:0 -30px auto;top:46%;height:2px;background:repeating-linear-gradient(90deg,rgba(201,169,110,.8) 0 14px,transparent 14px 30px);animation:pfflow 1.6s linear infinite}
+.pf-track>.pf-card:nth-child(7)::after{inset:0;background:radial-gradient(circle,#c9a96e 0 5px,transparent 6px) 12% 46%/auto no-repeat,radial-gradient(circle,#8fe0f0 0 5px,transparent 6px) 50% 46%/auto no-repeat,radial-gradient(circle,#c9a96e 0 5px,transparent 6px) 88% 46%/auto no-repeat;filter:drop-shadow(0 0 7px #c9a96e);animation:pfpulse 2.2s ease-in-out infinite}
+[data-theme=light] .pf-card::before,[data-theme=light] .pf-card::after{opacity:.55}
+@keyframes pfspin{to{transform:rotate(360deg)}}
+@keyframes pfpulse{50%{opacity:.35;transform:scale(1.04)}}
+@keyframes pfrise{to{transform:translateY(-240px)}}
+@keyframes pfflick{50%{opacity:.55}}
+@keyframes pfgrid{to{transform:translate(24px,24px)}}
+@keyframes pfscan{to{transform:translateY(433%)}}
+@keyframes pfbars{from{transform:scaleY(.3)}to{transform:scaleY(1)}}
+@keyframes pfripple{from{transform:scale(.2);opacity:.85}to{transform:scale(1.7);opacity:0}}
+@keyframes pfaurora{from{transform:translate(-6%,-4%) rotate(0) scale(1)}to{transform:translate(6%,5%) rotate(25deg) scale(1.12)}}
+@keyframes pfflow{to{transform:translateX(30px)}}
+@media(prefers-reduced-motion:reduce){.pf-card::before,.pf-card::after{animation:none!important}}
