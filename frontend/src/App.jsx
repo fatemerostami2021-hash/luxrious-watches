@@ -4,6 +4,7 @@ import { useApp } from './store.js'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import Chat from './components/Chat.jsx'
+import CookieConsent from './components/CookieConsent.jsx'
 import Home from './pages/Home.jsx'
 const Product = lazy(() => import('./pages/Product.jsx'))
 const Cart = lazy(() => import('./pages/Cart.jsx'))
@@ -21,5 +22,5 @@ export default function App() {
   useEffect(() => { if (!hash) scrollTo(0, 0) }, [pathname])
   return <><Header />
     <main><Suspense fallback={<div className="page" />}><Routes><Route path="/" element={<Home />} /><Route path="/collection" element={<Collection />} /><Route path="/collection/:slug" element={<Product />} /><Route path="/cart" element={<Cart />} /><Route path="/blog" element={<Blog />} /><Route path="/blog/:slug" element={<BlogPost />} /><Route path="/about" element={<About />} /><Route path="/contact" element={<Contact />} /><Route path="/portfolio" element={<Portfolio />} /><Route path="/account" element={<Account />} /></Routes></Suspense></main>
-    <Footer /><Chat /></>
+    <Footer /><Chat /><CookieConsent /></>
 }

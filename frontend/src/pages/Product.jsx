@@ -16,7 +16,7 @@ export default function Product() {
     {inf && <div className="panel"><b>{inf[fa ? 2 : 0]}</b><p>{inf[fa ? 3 : 1]}</p><button onClick={() => { paused.current = false; setPick(null) }}>{fa ? 'ادامه' : 'Resume'}</button></div>}</div>
     <div className="info"><h1>{fa ? p.name_fa : p.name}</h1><p>{p[lang]}</p>
       {row('c', t.caseL, ['titanium', 'steel', 'rose'])}{row('d', t.dialL, ['obsidian', 'ivory', 'blue'])}{row('s', t.strapL, ['black', 'white', 'gold'])}
-      <h2>${price.toLocaleString()}</h2>
-      <button className="btn" onClick={() => add({ key: `${p.slug}-${o.c}-${o.d}-${o.s}`, name: p.name, price, opts: o })}>{t.add}</button>
+      <div className="buy"><h2>${price.toLocaleString()}</h2>
+        <button className="btn" onClick={() => add({ key: `${p.slug}-${o.c}-${o.d}-${o.s}`, name: p.name, price, opts: o })}>{t.add}</button></div>
       <p className="hint">{fa ? 'روی قطعه‌ها کلیک کن تا نامشان را ببینی.' : 'Click any part to see what it does.'}</p></div></section>
 }

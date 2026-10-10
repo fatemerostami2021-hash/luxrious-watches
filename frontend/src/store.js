@@ -8,7 +8,7 @@ export const useApp = create(persist((set, get) => ({
   remove: key => set(s => ({ items: s.items.filter(i => i.key !== key) })),
   clear: () => set({ items: [] }),
   setAuth: (user, token) => set({ user, token }),
-}), { name: 'verion' }))
+}), { name: 'verion', partialize: s => { let ok = false; try { ok = JSON.parse(localStorage.getItem('verion-consent') || 'null')?.prefs === true } catch {} if (ok) return s; const { lang, theme, ...rest } = s; return rest } }))
 export const useT = () => { const lang = useApp(s => s.lang); return lang }
 
 export const useUI = create(set => ({ chat: false, setChat: chat => set({ chat }) }))
